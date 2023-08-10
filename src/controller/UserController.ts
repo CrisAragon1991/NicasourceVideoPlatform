@@ -1,6 +1,6 @@
-import { AppDataSource } from "../data-source"
-import { NextFunction, Request, Response } from "express"
-import { User } from "../entity/User"
+import { AppDataSource } from '../data-source'
+import { NextFunction, Request, Response } from 'express'
+import { User } from '../entity/User'
 
 export class UserController {
 
@@ -19,7 +19,7 @@ export class UserController {
         })
 
         if (!user) {
-            return "unregistered user"
+            return 'unregistered user'
         }
         return user
     }
@@ -42,12 +42,12 @@ export class UserController {
         let userToRemove = await this.userRepository.findOneBy({ id })
 
         if (!userToRemove) {
-            return "this user not exist"
+            return 'this user not exist'
         }
 
         await this.userRepository.remove(userToRemove)
 
-        return "user has been removed"
+        return 'user has been removed'
     }
 
 }
