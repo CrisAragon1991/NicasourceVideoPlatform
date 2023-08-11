@@ -1,11 +1,11 @@
 import 'reflect-metadata'
 import { DataSource } from 'typeorm'
-import { User } from './entity/User'
 import 'dotenv/config'
-import { Reaction } from './entity/Reaction'
-import { FollowUser } from './entity/FollowUser'
-import { Role } from './entity/Role'
-import { Video } from './entity/Video'
+import { User } from './data/entity/User'
+import { Reaction } from './data/entity/Reaction'
+import { FollowUser } from './data/entity/FollowUser'
+import { Role } from './data/entity/Role'
+import { Video } from './data/entity/Video'
 
 export const AppDataSource = new DataSource({
     type: 'postgres',

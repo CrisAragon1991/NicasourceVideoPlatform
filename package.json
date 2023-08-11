@@ -16,7 +16,11 @@
       "typescript": "^4.9.5"
    },
    "dependencies": {
+      "@types/bcrypt": "^5.0.0",
+      "bcrypt": "^5.1.0",
       "body-parser": "^1.19.1",
+      "class-transformer": "^0.5.1",
+      "class-validator": "^0.14.0",
       "dotenv": "^16.3.1",
       "express": "^4.17.2",
       "morgan": "^1.10.0",
@@ -32,6 +36,7 @@
       "m:gen": "npm run typeorm migration:generate",
       "m:cre": "typeorm-ts-node-esm migration:create",
       "m:run": "npm run typeorm migration:run",
-      "m:rev": "npm run typeorm migration:revert"
+      "m:rev": "npm run typeorm migration:revert",
+      "test": "jest --watchAll --collectCoverage"
    }
 }

@@ -1,23 +1,23 @@
-import { UserController } from './controller/UserController'
+import { UserRegisterDto } from './domain/dto/user-register-dto'
+import { createUserImplemetation } from './domain/use-cases/create-user-implementation'
+import { UserController } from './presentation/controller/UserController'
+import { typeValidationMiddleware } from './presentation/middlewares/type-validation-middleware'
 
-export const Routes = [{
-    method: 'get',
-    route: '/users',
-    controller: UserController,
-    action: 'all'
-}, {
-    method: 'get',
-    route: '/users/:id',
-    controller: UserController,
-    action: 'one'
-}, {
-    method: 'post',
-    route: '/users',
-    controller: UserController,
-    action: 'save'
-}, {
-    method: 'delete',
-    route: '/users/:id',
-    controller: UserController,
-    action: 'remove'
-}]
+const userControllerDependencies = [
+    createUserImplemetation
+]
+
+export const UserRoutes = [
+    {
+        method: 'post',
+        route: '/sign-up',
+        controller: UserController,
+        action: 'save',
+        dependencies: userControllerDependencies,
+        middlewares: [typeValidationMiddleware(UserRegisterDto)]
+    }
+]
+
+export const Routes = [
+    ...UserRoutes
+]

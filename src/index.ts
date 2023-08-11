@@ -14,28 +14,28 @@ AppDataSource.initialize()
     app.use(bodyParser.json())
 
     // register express routes from defined application routes
-    Routes.forEach((route) => {
+    Routes.forEach((route: any) => {
         (app as any)[route.method](
         route.route,
-        // eslint-disable-next-line @typescript-eslint/ban-types
+        ...route.middlewares,
         async (req: Request, res: Response, next: Function) => {
           try {
-            const result = await new (route.controller as any)()[route.action](
+            const result = await new (route.controller as any)(...route.dependencies)[route.action](
               req,
               res,
               next
             )
-            res.json(result)
+            return result
           } catch (error) {
             next(error)
           }
         }
-      )
+        )
     })
-
     // setup express app here
     // ...
     app.use(handleError)
+    
     // start express server
     app.listen(process.env.API_PORT)
 
@@ -43,4 +43,4 @@ AppDataSource.initialize()
       `Express server has started on port ${process.env.API_PORT}. Open http://localhost:${process.env.API_PORT}/users to see results`
     )
   })
-  .catch((error) => console.log(error))
+  .catch((error) => console.log(`Global Error`,error))

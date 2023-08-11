@@ -23,10 +23,10 @@ export class User extends BaseEntity {
     @Column({type: 'varchar', unique: true, nullable: false})
     email: string   
 
-    @Column({type: 'varchar', unique: true, nullable: false})
+    @Column({type: 'varchar', unique: false, nullable: false})
     password: string
     
-    @Column({type: 'varchar', unique: true, nullable: false})
+    @Column({type: 'varchar', unique: false, nullable: true})
     photo: string
 
     @OneToMany(() => Video, (video) => video.user)
