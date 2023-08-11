@@ -12,6 +12,9 @@ export class UserRepositoryImplementation implements UserRepository {
     constructor(userDataSource: UserDataSource) {
         this.userDataSource = userDataSource;
     }
+    getRosourceByParams(params: { [key: string]: any; }[]): Promise<User> {
+        return this.userDataSource.getByParams(params)
+    }
 
     async createResource(resource: User): Promise<User> {
         return await this.userDataSource.create(resource)

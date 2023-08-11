@@ -8,8 +8,8 @@ export interface IBaseRepositoryGetResources<T extends BaseEntity> {
     getResources(): Promise<T[]>
 }
 
-export interface IBaseRepositoryGetResourceByIdentifier<T extends BaseEntity> {
-    getRosourceByIdentifier(id: number) : Promise<T>
+export interface IBaseRepositoryGetResourceByParams<T extends BaseEntity> {
+    getRosourceByParams(params: {[keys: string]: any}[], include: string[]) : Promise<T>
 }
 
 export interface IBaseRepositoryDeleteResourceByIdentifier<T extends BaseEntity> {

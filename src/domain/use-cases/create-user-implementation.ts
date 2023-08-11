@@ -1,4 +1,4 @@
-import { UserDataSource } from "../../data/data-source/user-data-source";
+import { UserDataSource, userDataSource } from "../../data/data-source/user-data-source";
 import { User } from "../../data/entity/User";
 import { UserRepository } from "../interfaces/repository/user-repository";
 import { ICreateUserUseCase } from "../interfaces/use-cases/user/icreate-user";
@@ -22,4 +22,4 @@ export class CreateUserImplementation implements ICreateUserUseCase {
     }
 }
 
-export const createUserImplemetation = new CreateUserImplementation(new UserRepository(new UserDataSource));
+export const createUserImplemetation = new CreateUserImplementation(new UserRepository(userDataSource));

@@ -1,7 +1,8 @@
 import { BaseEntity } from  '../../entity/BaseEntity/BaseEntity'
 import { AppDataSource } from  '../../../data-source'
 import { InsertResult, Repository } from 'typeorm'
-import { ERROR_INSERTING_DATA } from '../../../dictionaryConst/const'
+import { ERROR_INSERTING_DATA, RESOURCE_NOT_FOUND } from '../../../dictionaryConst/const'
+import { ApplicationError } from '../../../utilities/application-error'
 
 export class GenericDataSource<T extends BaseEntity> {
     
@@ -30,8 +31,27 @@ export class GenericDataSource<T extends BaseEntity> {
         return []
     }
 
-    async getById(id: number) : Promise<T> {
-        return 'AS' as any
+    async getByParams(searchParams: {[key:string]: any}[], include: string[]) : Promise<T> {
+        let searchstring = ''
+        searchParams.forEach((param, index )=> {
+            let keyname = Object.keys(param)[0]
+            if (index === 0) {
+                searchstring = searchstring + `${this.nameClass}.${keyname} = '${param[keyname]}'`
+            } else {
+                searchstring = searchstring + ` and where ${this.nameClass}.${keyname} = '${param.keyname}'`
+            }
+        })
+        let query = this.repository.createQueryBuilder(this.nameClass)
+                                   .where(searchstring)
+        include.forEach(cad => {
+            query.leftJoinAndSelect(`${this.nameClass}.${cad}`, cad)
+        })
+        let result = await query.getOne();
+        if (result) {
+            return result
+        } else {
+            throw new ApplicationError(RESOURCE_NOT_FOUND, 404)
+        }
     }
 
     async update(id: number, origin: T) : Promise<boolean> {
