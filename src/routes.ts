@@ -73,6 +73,14 @@ export const videosRoutes = [
     },
     {
         method: 'patch',
+        route: '/video/:videoId/changeStatus',
+        controller: VideoController,
+        action: 'changeStatus',
+        dependencies: videoControllerDependencies,
+        middlewares: [verifyToken, roleChecker(['video_owner'])]
+    },
+    {
+        method: 'patch',
         route: '/video/:videoId',
         controller: VideoController,
         action: 'update',

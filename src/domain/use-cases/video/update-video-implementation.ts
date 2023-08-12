@@ -15,7 +15,7 @@ export class UpdateVideoImplementation implements IUpdateVideoUseCase {
     }
 
     async execute(id: number, video: VideoUpdateDto): Promise<boolean> {
-        return await this.videoRepository.updateResourceByIdentifier(id, {name: video.name, description: video.description} as any)
+        return await this.videoRepository.updateResourceByIdentifier(id, video as any)
     }
 }
 
