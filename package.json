@@ -36,7 +36,7 @@
       "build": "tsc",
       "typeorm": "typeorm-ts-node-commonjs -d ./src/data-source.ts",
       "m:gen": "npm run typeorm migration:generate",
-      "m:cre": "typeorm-ts-node-esm migration:create",
+      "m:cre": "typeorm-ts-node-commonjs migration:create",
       "m:run": "npm run typeorm migration:run",
       "m:rev": "npm run typeorm migration:revert",
       "test": "jest --watchAll --collectCoverage"
