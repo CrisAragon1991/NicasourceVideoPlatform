@@ -29,7 +29,7 @@ export class LogginUserImplementation implements ILogginUseCase {
         if (!match) {
             throw new ApplicationError(USER_OR_PASSWORD_INVALID, 404)
         }
-        const token = jwt.sign({ _id: result.id?.toString(), firstName: result.firstName, lastName: result.lastName, role: result.role },  process.env.SECRET_JWT+'', {
+        const token = jwt.sign({ id: result.id, firstName: result.firstName, lastName: result.lastName, role: result.role.id },  process.env.SECRET_JWT+'', {
             expiresIn: process.env.TOKEN_LIFE,
           });
         result.password = ''

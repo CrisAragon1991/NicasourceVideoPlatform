@@ -1,3 +1,5 @@
 export const ERROR_INSERTING_DATA = 'ERROR_INSERTING_DATA'
 export const RESOURCE_NOT_FOUND = 'RESOURCE_NOT_FOUND'
 export const USER_OR_PASSWORD_INVALID = 'USER_OR_PASSWORD_INVALID'
+export const TOKEN_REQUIRED = 'A token is required for authentication'
+export const TOKEN_INVALID = 'TOKEN_INVALID'
