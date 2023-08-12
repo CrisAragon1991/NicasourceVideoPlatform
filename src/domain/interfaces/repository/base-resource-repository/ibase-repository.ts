@@ -16,6 +16,6 @@ export interface IBaseRepositoryDeleteResourceByIdentifier<T extends BaseEntity>
     deleteResource(id: number) : Promise<boolean>
 }
 
-export interface IBaseRepositoryDeleteUpdateByIdentifier<T extends BaseEntity> {
-    updateResourceByIdentifier(id: number) : Promise<boolean>
+export interface IBaseRepositoryUpdateByIdentifier<T extends BaseEntity> {
+    updateResourceByIdentifier(id: number, resource: T) : Promise<boolean>
 }

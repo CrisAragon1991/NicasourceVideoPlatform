@@ -28,7 +28,8 @@ export class GenericDataSource<T extends BaseEntity> {
     }
 
     async list() : Promise<T[]> {
-        return []
+        return await this.repository.createQueryBuilder(this.nameClass)
+                                    .getMany()
     }
 
     async getByParams(searchParams: {[key:string]: any}[], include: string[]) : Promise<T> {
@@ -55,7 +56,12 @@ export class GenericDataSource<T extends BaseEntity> {
     }
 
     async update(id: number, origin: T) : Promise<boolean> {
-        return true
+        let result = await this.repository.createQueryBuilder()
+                             .update(this.nameClass)
+                             .set(origin)
+                             .where(`${this.nameClass}.id = :id`, {id})
+                             .execute()
+        return result.affected === 0 ? false : true
     }
 
     async deleteById(id: number) : Promise<boolean> {

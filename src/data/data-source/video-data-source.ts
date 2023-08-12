@@ -1,4 +1,4 @@
-import { Video } from "../entity/Video";
+import { Video } from "../entity/Video"
 import { GenericDataSource } from "./generic-data-source/generic-data-source";
 
 export class VideoDataSource extends GenericDataSource<Video> {
@@ -6,7 +6,7 @@ export class VideoDataSource extends GenericDataSource<Video> {
      *
      */
     constructor() {
-        super(Video);
+        super(Video)
     }
 }
 

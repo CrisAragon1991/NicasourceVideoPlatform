@@ -22,7 +22,6 @@ export class LogginUserImplementation implements ILogginUseCase {
 
     async execute (user: UserLogginDto): Promise<User> {
         const result = await this.userRepository.getRosourceByParams([{email: user.email}], ['role'])
-        console.debug(result)
         if (!result) {
             throw new ApplicationError(USER_OR_PASSWORD_INVALID, 404)
         }

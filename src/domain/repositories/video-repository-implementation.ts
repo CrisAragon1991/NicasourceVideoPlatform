@@ -1,8 +1,9 @@
 import { VideoDataSource } from "../../data/data-source/video-data-source";
 import { Video } from "../../data/entity/Video";
-import { IBaseRepositoryCreate, IBaseRepositoryGetResourceByParams } from "../interfaces/repository/base-resource-repository/ibase-repository";
+import { IBaseRepositoryCreate, IBaseRepositoryGetResourceByParams, IBaseRepositoryGetResources, IBaseRepositoryUpdateByIdentifier } from "../interfaces/repository/base-resource-repository/ibase-repository";
 
-export class VideoRepositoryImplementation implements IBaseRepositoryCreate<Video>, IBaseRepositoryGetResourceByParams<Video> {
+
+export class VideoRepositoryImplementation implements IBaseRepositoryCreate<Video>, IBaseRepositoryGetResourceByParams<Video>, IBaseRepositoryGetResources<Video>, IBaseRepositoryUpdateByIdentifier<Video>{
     
     videoDataSource: VideoDataSource
 
@@ -19,5 +20,13 @@ export class VideoRepositoryImplementation implements IBaseRepositoryCreate<Vide
 
     async createResource(resource: Video): Promise<Video> {
         return await this.videoDataSource.create(resource)
+    }
+
+    async getResources(): Promise<Video[]> {
+        return await this.videoDataSource.list();
+    }
+    
+    async updateResourceByIdentifier(id: number, resource: Video): Promise<boolean> {
+        return await this.videoDataSource.update(id, resource)
     }
 }

@@ -14,13 +14,13 @@ AppDataSource.initialize()
     const app = express()
     app.use(fileUpload({
       limits: { fileSize: 50 * 1024 * 1024 },
-    }));
+    }))
     app.use(morgan('combined'))
     app.use(cors({
       origin: "*",
       methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
       credentials: true,
-    }));
+    }))
     app.use(bodyParser.json())
 
     // register express routes from defined application routes
