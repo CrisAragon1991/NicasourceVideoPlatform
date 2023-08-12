@@ -12,7 +12,7 @@ export class Video extends BaseEntity {
     @Column({type: 'varchar', nullable: false})
     name: string
     
-    @Column({type: 'varchar', nullable: false})
+    @Column({type: 'varchar', nullable: true})
     description: string
 
     @Column({type: 'varchar', nullable: false})

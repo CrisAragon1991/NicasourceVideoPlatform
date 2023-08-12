@@ -10,9 +10,10 @@ export const verifyToken = (req: Request, res: Response, next: NextFunction) => 
     return res.status(403).send(TOKEN_REQUIRED);
   }
   try {
-    const decoded = jwt.verify(token, process.env.BCRYP_HASH_SALT+'');
+    const decoded = jwt.verify(token, process.env.SECRET_JWT+'');
     (req as any).user = decoded;
   } catch (err) {
+    console.debug(err)
     return res.status(401).send(TOKEN_INVALID);
   }
   return next();

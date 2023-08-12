@@ -1,9 +1,7 @@
 import { NextFunction, Request, Response } from 'express'
-import { ICreateUserUseCase } from '../../domain/interfaces/use-cases/user/icreate-user';
-import { ILogginUseCase } from '../../domain/interfaces/use-cases/user/iloggin-user';
 import { ICreateVideoUseCase } from '../../domain/interfaces/use-cases/video/icreate-video';
 
-export class UserController {
+export class VideoController {
 
     createVideoUserCase: ICreateVideoUseCase
 
@@ -15,7 +13,7 @@ export class UserController {
     }
 
     async save(request: Request, response: Response, next: NextFunction) {
-        let result = await this.createUserUseCase.execute(request.body)
+        let result = await this.createVideoUserCase.execute(request.body, (request as any).files.file, (request as any).user.id)
         return response.status(200).json(result)
     }
 }

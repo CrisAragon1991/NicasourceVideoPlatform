@@ -10,4 +10,4 @@ export class VideoDataSource extends GenericDataSource<Video> {
     }
 }
 
-export const userDataSource = new UserDataSource()
+export const videoDataSource = new VideoDataSource()

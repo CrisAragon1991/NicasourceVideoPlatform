@@ -11,9 +11,6 @@ export class VideoRegisterDto {
     @IsOptional()
     description: string
 
-    @IsNotEmpty()
-    file: UploadedFile
-
     @IsBoolean()
     @IsOptional()
     published: boolean

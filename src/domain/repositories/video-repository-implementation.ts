@@ -1,9 +1,8 @@
 import { VideoDataSource } from "../../data/data-source/video-data-source";
-import { User } from "../../data/entity/User";
 import { Video } from "../../data/entity/Video";
-import { UserRepository } from "../interfaces/repository/user-repository";
+import { IBaseRepositoryCreate, IBaseRepositoryGetResourceByParams } from "../interfaces/repository/base-resource-repository/ibase-repository";
 
-export class VideoRepositoryImplementation implements VideoRepository {
+export class VideoRepositoryImplementation implements IBaseRepositoryCreate<Video>, IBaseRepositoryGetResourceByParams<Video> {
     
     videoDataSource: VideoDataSource
 

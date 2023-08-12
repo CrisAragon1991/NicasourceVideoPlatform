@@ -1,19 +1,39 @@
-export class CreateUserImplementation implements ICreateUserUseCase {
+import { videoDataSource } from "../../../data/data-source/video-data-source"
+import { Video } from "../../../data/entity/Video"
+import { FORMAT_NOT_SUPPORTED, VIDEO_PATH } from "../../../dictionaryConst/const"
+import { ApplicationError } from "../../../utilities/application-error"
+import { VideoRegisterDto } from "../../dto/video/video-register-dto"
+import { ICreateVideoUseCase } from "../../interfaces/use-cases/video/icreate-video"
+import { VideoRepositoryImplementation } from "../../repositories/video-repository-implementation"
+import { UploadedFile } from "express-fileupload";
+import * as fs from 'fs'
+
+export class CreateVideoImplementation implements ICreateVideoUseCase {
     
-    userRepository: VideoRepository
+    userRepository: VideoRepositoryImplementation
 
     /**
      *
      */
-    constructor(userRepository: VideoRepository) {
+    constructor(userRepository: VideoRepositoryImplementation) {
         this.userRepository = userRepository
     }
 
-    async execute (user: UserRegisterDto): Promise<User> {
-         user.password = await bcrypt.hash(user.password, Number(process.env.BCRYP_HASH_SALT))
-        const result = this.userRepository.createResource({...user, role: {id: user.isTeacher ? RoleIdEnum.Teacher : RoleIdEnum.Student}} as any)
+    async execute (video: VideoRegisterDto, file: UploadedFile, userId: number): Promise<Video> {
+        let filenameSplited = file.name.split('.')
+        let types = ['webm', 'WEBM', 'mp4', 'MP4', 'avi', 'AVI', 'wmv', 'WMV']
+        if (filenameSplited[filenameSplited.length-1]){
+            throw new ApplicationError(FORMAT_NOT_SUPPORTED, 415)
+        }
+        if (!fs.existsSync(VIDEO_PATH)){
+            fs.mkdirSync(VIDEO_PATH);
+        }
+        let path = `${VIDEO_PATH}/${filenameSplited[0]}${Date.now()}.${filenameSplited[filenameSplited.length - 1]}`
+        await file.mv(path);
+        video['patch'] = path 
+        const result = await this.userRepository.createResource(video as any)
         return result
     }
 }
 
-export const createUserImplemetation = new CreateUserImplementation(new UserRepository(userDataSource));
+export const createVideoImplemetation = new CreateVideoImplementation(new VideoRepositoryImplementation(videoDataSource));

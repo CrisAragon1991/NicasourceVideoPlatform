@@ -12,7 +12,9 @@ AppDataSource.initialize()
   .then(async () => {
     // create express app
     const app = express()
-    app.use(fileUpload());
+    app.use(fileUpload({
+      limits: { fileSize: 50 * 1024 * 1024 },
+    }));
     app.use(morgan('combined'))
     app.use(cors({
       origin: "*",

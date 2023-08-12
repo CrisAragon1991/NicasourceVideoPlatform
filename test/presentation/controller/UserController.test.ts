@@ -4,6 +4,7 @@ import { ICreateUserUseCase } from "../../../src/domain/interfaces/use-cases/use
 import { UserController } from "../../../src/presentation/controller/UserController";
 import app from '../../index'
 import * as request from "supertest";
+import { ILogginUseCase } from "../../../src/domain/interfaces/use-cases/user/iloggin-user";
 
 class MockCreateUserUseCase implements ICreateUserUseCase {
     execute(user: User): Promise<User> {
@@ -11,13 +12,22 @@ class MockCreateUserUseCase implements ICreateUserUseCase {
     }
 } 
 
+class MockLogginUserUseCase implements ILogginUseCase {
+  execute(user: User): Promise<User> {
+      throw new Error("Method not implemented.");
+  }
+}
+
+
 describe('UserController', () => {
   let mockCreateUserUseCase: ICreateUserUseCase  
+  let mockLogginUserCase: ILogginUseCase
   let userController: UserController
   
   beforeAll(() => {
     mockCreateUserUseCase = new MockCreateUserUseCase()
-    userController = new UserController (mockCreateUserUseCase)
+    
+    userController = new UserController (mockCreateUserUseCase, mockLogginUserCase)
   })
   beforeEach(() => {
     jest.clearAllMocks();
