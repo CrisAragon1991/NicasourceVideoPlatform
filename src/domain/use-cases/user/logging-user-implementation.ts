@@ -1,21 +1,22 @@
-import { userDataSource } from "../../data/data-source/user-data-source";
-import { User } from "../../data/entity/User";
-import { UserLogginDto } from "../dto/user-loggin-dto";
-import { UserRepository } from "../interfaces/repository/user-repository";
-import * as bcrypt from 'bcrypt';
-import { ILogginUseCase } from "../interfaces/use-cases/user/iloggin-user";
-import { ApplicationError } from "../../utilities/application-error";
-import { USER_OR_PASSWORD_INVALID } from "../../dictionaryConst/const";
+
 import * as jwt from 'jsonwebtoken';
+import { UserRepositoryImplementation } from "../../repositories/user-repository-implementation";
+import { userDataSource } from '../../../data/data-source/user-data-source';
+import { User } from '../../../data/entity/User';
+import { USER_OR_PASSWORD_INVALID } from '../../../dictionaryConst/const';
+import { ApplicationError } from '../../../utilities/application-error';
+import { UserLogginDto } from '../../dto/user/user-loggin-dto';
+import { ILogginUseCase } from '../../interfaces/use-cases/user/iloggin-user';
+import * as bcrypt from 'bcrypt';
 
 export class LogginUserImplementation implements ILogginUseCase {
     
-    userRepository: UserRepository
+    userRepository: UserRepositoryImplementation
 
     /**
      *
      */
-    constructor(userRepository: UserRepository) {
+    constructor(userRepository: UserRepositoryImplementation) {
         this.userRepository = userRepository
     }
 
@@ -38,4 +39,4 @@ export class LogginUserImplementation implements ILogginUseCase {
     }
 }
 
-export const logginUseCaseImplemetation = new LogginUserImplementation(new UserRepository(userDataSource));
+export const logginUseCaseImplemetation = new LogginUserImplementation(new UserRepositoryImplementation(userDataSource));

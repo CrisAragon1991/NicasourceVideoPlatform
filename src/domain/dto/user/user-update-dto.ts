@@ -1,33 +1,34 @@
 import { IsBoolean, IsEmail, IsNotEmpty, IsNumber, IsOptional, IsString, Matches, Max, MaxLength, MinLength, Validate } from "class-validator"
-import { CustomMatchPasswords } from "../../utilities/custom-validator"
+import { CustomMatchPasswords } from "../../../utilities/custom-validator"
 
-export class UserRegisterDto {
+export class UserUpdateDto {
     @IsString()
     @MaxLength(30)
-    @IsNotEmpty()
+    @IsOptional()
     firstName: string
 
     @IsString()
     @MaxLength(30)
-    @IsNotEmpty()
+    @IsOptional()
     lastName: string
 
     @IsNumber()
     @Max(100)
-    @IsNotEmpty()
+    @IsOptional()
     age: number
 
     @IsEmail()
-    @IsNotEmpty()
+    @IsOptional()
     email: string   
 
     @IsString()
     @MinLength(8)
-    @IsNotEmpty()
     @Matches(/^(?=(.*[a-z]){1,})(?=(.*[A-Z]){1,})(?=(.*[0-9]){1,})(?=(.*[!@#$%^&*()\-__+.]){1,}).{8,}$/g)
+    @IsOptional()
     password: string
 
     @Validate(CustomMatchPasswords, ['password'])
+    @IsOptional()
     repetedPassword: string
 
     @IsBoolean()
