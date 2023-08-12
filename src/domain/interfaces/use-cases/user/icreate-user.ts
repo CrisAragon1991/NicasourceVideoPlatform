@@ -1,5 +1,5 @@
-import { User } from "../../../../data/entity/User";
+import { UserRegisterDto } from "../../../dto/user-register-dto";
 
 export interface ICreateUserUseCase {
-    execute(user: User) : Promise<User>
+    execute(user: UserRegisterDto) : Promise<User>
 }

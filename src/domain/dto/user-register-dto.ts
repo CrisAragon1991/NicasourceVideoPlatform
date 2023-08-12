@@ -1,4 +1,4 @@
-import { IsEmail, IsNotEmpty, IsNumber, IsString, Matches, Max, MaxLength, MinLength, Validate } from "class-validator"
+import { IsBoolean, IsEmail, IsNotEmpty, IsNumber, IsOptional, IsString, Matches, Max, MaxLength, MinLength, Validate } from "class-validator"
 import { CustomMatchPasswords } from "../../utilities/custom-validator"
 
 export class UserRegisterDto {
@@ -26,4 +26,8 @@ export class UserRegisterDto {
 
     @Validate(CustomMatchPasswords, ['password'])
     repetedPassword: string
+
+    @IsBoolean()
+    @IsOptional()
+    isTeacher: boolean
 }
