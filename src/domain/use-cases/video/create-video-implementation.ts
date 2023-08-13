@@ -29,9 +29,10 @@ export class CreateVideoImplementation implements ICreateVideoUseCase {
         if (!fs.existsSync(VIDEO_PATH)){
             fs.mkdirSync(VIDEO_PATH)
         }
-        let pathCurrentVideo = `${VIDEO_PATH}${path.sep}${filenameSplited[0]}${Date.now()}.${filenameSplited[filenameSplited.length - 1]}`
+        let filename = `${filenameSplited[0]}${Date.now()}.${filenameSplited[filenameSplited.length - 1]}`
+        let pathCurrentVideo = `${VIDEO_PATH}${path.sep}${filename}`
         await file.mv(pathCurrentVideo)
-        video['patch'] = pathCurrentVideo
+        video['patch'] = filename
         video['user'] = {id: userId} 
         const result = await this.userRepository.createResource(video as any)
         return result

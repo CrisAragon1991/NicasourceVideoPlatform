@@ -7,6 +7,7 @@ import { Routes } from './routes'
 import { handleError } from './utilities/handle-error'
 import * as cors from "cors"
 import * as fileUpload from 'express-fileupload'
+import { VIDEO_PATH } from './dictionaryConst/const'
 
 AppDataSource.initialize()
   .then(async () => {
@@ -22,6 +23,7 @@ AppDataSource.initialize()
       credentials: true,
     }))
     app.use(bodyParser.json())
+    app.use('/public', express.static(VIDEO_PATH))
 
     // register express routes from defined application routes
     Routes.forEach((route: any) => {
