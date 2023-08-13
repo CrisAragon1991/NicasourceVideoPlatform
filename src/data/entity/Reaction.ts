@@ -6,9 +6,9 @@ import { BaseEntity } from './BaseEntity/BaseEntity';
 export enum ReactionType {
     LIKE = 'Like',
     DISLIKE = 'DisLike',
-    ISFUNNY = 'Is funny',
+    ISFUNNY = 'It is funny',
     IMANGRY = 'Im Angry',
-    ILOVE = 'I love'
+    ILOVE = 'I love it'
 }
 
 @Entity()
