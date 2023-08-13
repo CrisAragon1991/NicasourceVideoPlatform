@@ -19,6 +19,7 @@ export class UserDataSource extends GenericDataSource<User> {
                              .leftJoinAndSelect('user.videos', 'videos')
                              .leftJoinAndSelect('videos.reaction', 'reaction')
                              .leftJoinAndSelect('user.currentUserIsFollowed', 'currentUserIsFollowed')
+                             .leftJoinAndSelect('currentUserIsFollowed.followeruser', 'followeruser')
                              .where('user.id = :id', {id: userId})
                              .getOne()
         if (!user) {
