@@ -50,7 +50,7 @@ AppDataSource.initialize()
     app.listen(process.env.API_PORT)
 
     console.log(
-      `Express server has started on port ${process.env.API_PORT}. Open http://localhost:${process.env.API_PORT}/users to see results`
+      `Express server has started on port ${process.env.API_PORT}. Open http://localhost:${process.env.API_PORT} to see results`
     )
   })
   .catch((error) => console.log(`Global Error`,error))

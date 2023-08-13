@@ -17,6 +17,9 @@ import { VideoUpdateDto } from './domain/dto/video/video-update-dto'
 import { ReactionController } from './presentation/controller/ReactionController'
 import { updateOrInsertReactionImplementation } from './domain/use-cases/reaction/update-insert-implementation'
 import { ReactionUpdateDto } from './domain/dto/reaction/reaction-dto'
+import { createFollowerUseCase } from './domain/use-cases/follow-user/create-follow-implementation'
+import { deleteFollowerUseCase } from './domain/use-cases/follow-user/delete-follow-implementation'
+import { FollowUserController } from './presentation/controller/FollowUserController'
 
 const userControllerDependencies = [
     createUserImplemetation,
@@ -32,6 +35,11 @@ const videoControllerDependencies = [
 
 const reactionControllerDependencies = [
     updateOrInsertReactionImplementation   
+]
+
+const followControllerDependencies = [
+    createFollowerUseCase,
+    deleteFollowerUseCase   
 ]
 
 export const UserRoutes = [
@@ -107,8 +115,27 @@ export const reactionRoutes = [
     }
 ]
 
+export const followRoutes = [
+    {
+        method: 'post',
+        route: '/follow/:followedUserId',
+        controller: FollowUserController,
+        action: 'follow',
+        dependencies: followControllerDependencies,
+        middlewares: [verifyToken, roleChecker([`followedUserIdIsTeacher`])]
+    },
+    {
+        method: 'post',
+        route: '/unfollow/:followedUserId',
+        controller: FollowUserController,
+        action: 'unfollow',
+        dependencies: followControllerDependencies,
+        middlewares: [verifyToken, roleChecker([`followedUserIdIsTeacher`])]
+    }
+]
 export const Routes = [
     ...UserRoutes,
     ...videosRoutes,
-    ...reactionRoutes
+    ...reactionRoutes,
+    ...followRoutes
 ]

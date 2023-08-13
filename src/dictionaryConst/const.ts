@@ -9,3 +9,4 @@ export const ACCESS_DENIED = 'ACCESS_DENIED'
 export const ERROR_SAVING_FILE = 'ERROR_SAVING_FILE'
 export const VIDEO_PATH = `${__dirname}${path.sep}..${path.sep}video`
 export const FORMAT_NOT_SUPPORTED = 'FORMAT_NOT_SUPPORTED'
+export const ACTION_NOT_ALLOWED = 'ACTION_NOT_ALLOWED'

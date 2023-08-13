@@ -1,4 +1,3 @@
-import { ReactionType } from "../../../../data/entity/Reaction";
 import { ReactionUpdateDto } from "../../../dto/reaction/reaction-dto";
 
 export interface IUpdateOrInsertReaction {

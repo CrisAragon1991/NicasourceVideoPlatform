@@ -65,6 +65,10 @@ export class GenericDataSource<T extends BaseEntity> {
     }
 
     async deleteById(id: number) : Promise<boolean> {
+        await this.repository.createQueryBuilder(this.nameClass)
+                             .where(`${this.nameClass}.id = :id`, {id})
+                             .softDelete()
+                             .execute() 
         return true
     }
 }

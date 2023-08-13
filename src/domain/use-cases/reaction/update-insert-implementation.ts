@@ -17,7 +17,6 @@ export class UpdateInsertReactionImplementation implements IUpdateOrInsertReacti
 
     async execute(userId: number, videoId: number, reactionObject: ReactionUpdateDto): Promise<boolean> {
         let reaction = await this.reactionRepository.getReactionByUserIdAndVideo(userId, videoId)
-        console.log(`reaction found`, reaction)
         if (!reaction) {
             let newReaction = new Reaction();
             newReaction = {...newReaction, reactionType: reactionObject.reactionType, user: {id: userId}, video: {id: videoId}} as any
