@@ -19,4 +19,8 @@ export class UserRepositoryImplementation implements IBaseRepositoryCreate<User>
     async createResource(resource: User): Promise<User> {
         return await this.userDataSource.create(resource)
     }
+
+    getProfile(userId: number) {
+        return this.userDataSource.getProfile(userId)
+    }
 }

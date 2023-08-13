@@ -45,7 +45,13 @@ export class GenericDataSource<T extends BaseEntity> {
         let query = this.repository.createQueryBuilder(this.nameClass)
                                    .where(searchstring)
         include.forEach(cad => {
-            query.leftJoinAndSelect(`${this.nameClass}.${cad}`, cad)
+            let spliteableCad = cad.split('.')
+            if (spliteableCad.length == 2) {
+                query.leftJoinAndSelect(`${spliteableCad[0]}.${spliteableCad[1]}`, `${spliteableCad[1]}`)
+            }
+            else {
+                query.leftJoinAndSelect(`${this.nameClass}.${cad}`, cad)
+            }
         })
         let result = await query.getOne();
         if (result) {

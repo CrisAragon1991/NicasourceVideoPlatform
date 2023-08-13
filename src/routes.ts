@@ -20,10 +20,12 @@ import { ReactionUpdateDto } from './domain/dto/reaction/reaction-dto'
 import { createFollowerUseCase } from './domain/use-cases/follow-user/create-follow-implementation'
 import { deleteFollowerUseCase } from './domain/use-cases/follow-user/delete-follow-implementation'
 import { FollowUserController } from './presentation/controller/FollowUserController'
+import { profileUserImplemetation } from './domain/use-cases/user/iprofile-user-implementation'
 
 const userControllerDependencies = [
     createUserImplemetation,
-    logginUseCaseImplemetation
+    logginUseCaseImplemetation,
+    profileUserImplemetation
 ]
 
 const videoControllerDependencies = [
@@ -58,6 +60,14 @@ export const UserRoutes = [
         action: 'logging',
         dependencies: userControllerDependencies,
         middlewares: [TypeValidation(UserLogginDto)]
+    },
+    {
+        method: 'get',
+        route: '/user/:followedUserId',
+        controller: UserController,
+        action: 'userCreatorProfile',
+        dependencies: userControllerDependencies,
+        middlewares: [verifyToken, roleChecker([`followedUserIdIsTeacher`])]
     }
 ]
 
