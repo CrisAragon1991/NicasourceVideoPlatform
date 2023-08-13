@@ -38,12 +38,12 @@ export class VideoController {
     }
 
     async update(request: Request, response: Response, next: NextFunction) {
-        let result = await this.updateVideoUseCase.execute((request as any).params.videoId, {name: request.body.name, description: request.body.description})
+        await this.updateVideoUseCase.execute((request as any).params.videoId, {name: request.body.name, description: request.body.description})
         return response.status(204).send()
     }
 
     async changeStatus(request: Request, response: Response, next: NextFunction) {
-        let result = await this.updateVideoUseCase.execute((request as any).params.videoId, {published: request.query.published === 'true' ? true : false} as any)
+        await this.updateVideoUseCase.execute((request as any).params.videoId, {published: request.query.published === 'true' ? true : false} as any)
         return response.status(204).send()
     }
 }

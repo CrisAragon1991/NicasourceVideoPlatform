@@ -14,6 +14,9 @@ import { listVideoImplemetation } from './domain/use-cases/video/list-video-impl
 import { detailsVideoImplemetation } from './domain/use-cases/video/details-video-implementation'
 import { updateVideoImplemetation } from './domain/use-cases/video/update-video-implementation'
 import { VideoUpdateDto } from './domain/dto/video/video-update-dto'
+import { ReactionController } from './presentation/controller/ReactionController'
+import { updateOrInsertReactionImplementation } from './domain/use-cases/reaction/update-insert-implementation'
+import { ReactionUpdateDto } from './domain/dto/reaction/reaction-dto'
 
 const userControllerDependencies = [
     createUserImplemetation,
@@ -25,6 +28,10 @@ const videoControllerDependencies = [
     listVideoImplemetation,
     detailsVideoImplemetation,
     updateVideoImplemetation
+]
+
+const reactionControllerDependencies = [
+    updateOrInsertReactionImplementation   
 ]
 
 export const UserRoutes = [
@@ -89,7 +96,19 @@ export const videosRoutes = [
     }
 ]
 
+export const reactionRoutes = [
+    {
+        method: 'post',
+        route: '/reaction/:videoId',
+        controller: ReactionController,
+        action: 'updateOrInsert',
+        dependencies: reactionControllerDependencies,
+        middlewares: [verifyToken, TypeValidation(ReactionUpdateDto)]
+    }
+]
+
 export const Routes = [
     ...UserRoutes,
-    ...videosRoutes
+    ...videosRoutes,
+    ...reactionRoutes
 ]

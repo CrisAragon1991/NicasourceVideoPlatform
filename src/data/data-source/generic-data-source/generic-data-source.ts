@@ -6,8 +6,8 @@ import { ApplicationError } from '../../../utilities/application-error'
 
 export class GenericDataSource<T extends BaseEntity> {
     
-    private readonly repository: Repository<T>
-    private readonly nameClass: string
+    readonly repository: Repository<T>
+    readonly nameClass: string
     
     /**
      *
