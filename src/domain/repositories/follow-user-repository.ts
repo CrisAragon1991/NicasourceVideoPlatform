@@ -1,4 +1,4 @@
-import { FollowUserDataSource } from "../../data/data-source/follow-user-data-source";
+import { FollowUserDataSource } from '../../data/data-source/follow-user-data-source'
 
 export class FollowUserRepository {
     followUserDataSource: FollowUserDataSource

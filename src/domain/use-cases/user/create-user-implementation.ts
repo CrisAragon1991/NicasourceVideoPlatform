@@ -1,10 +1,10 @@
-import { userDataSource } from "../../../data/data-source/user-data-source";
-import { User } from "../../../data/entity/User";
-import { UserRegisterDto } from "../../dto/user/user-register-dto";
-import { RoleIdEnum } from "../../enums/role-enum";
-import { ICreateUserUseCase } from "../../interfaces/use-cases/user/icreate-user";
-import * as bcrypt from 'bcrypt';
-import { UserRepositoryImplementation } from "../../repositories/user-repository-implementation";
+import { userDataSource } from '../../../data/data-source/user-data-source'
+import { User } from '../../../data/entity/User'
+import { UserRegisterDto } from '../../dto/user/user-register-dto'
+import { RoleIdEnum } from '../../enums/role-enum'
+import { ICreateUserUseCase } from '../../interfaces/use-cases/user/icreate-user'
+import * as bcrypt from 'bcrypt'
+import { UserRepositoryImplementation } from '../../repositories/user-repository-implementation'
 
 export class CreateUserImplementation implements ICreateUserUseCase {
     
@@ -24,4 +24,4 @@ export class CreateUserImplementation implements ICreateUserUseCase {
     }
 }
 
-export const createUserImplemetation = new CreateUserImplementation(new UserRepositoryImplementation(userDataSource));
+export const createUserImplemetation = new CreateUserImplementation(new UserRepositoryImplementation(userDataSource))

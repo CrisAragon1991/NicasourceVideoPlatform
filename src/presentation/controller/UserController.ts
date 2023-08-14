@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express'
-import { ICreateUserUseCase } from '../../domain/interfaces/use-cases/user/icreate-user';
-import { ILogginUseCase } from '../../domain/interfaces/use-cases/user/iloggin-user';
-import { IProfileUserUseCase } from '../../domain/interfaces/use-cases/user/iprofile-user';
+import { ICreateUserUseCase } from '../../domain/interfaces/use-cases/user/icreate-user'
+import { ILogginUseCase } from '../../domain/interfaces/use-cases/user/iloggin-user'
+import { IProfileUserUseCase } from '../../domain/interfaces/use-cases/user/iprofile-user'
 
 export class UserController {
 
@@ -17,18 +17,18 @@ export class UserController {
         this.profileUseCase = profileUseCase
     }
 
-    async logging(request: Request, response: Response, next: NextFunction) {
-        let result = await this.logginUserCase.execute(request.body)
+    async logging(request: Request, response: Response, _next: NextFunction) {
+        const result = await this.logginUserCase.execute(request.body)
         return response.status(200).json(result)
     }
 
-    async save(request: Request, response: Response, next: NextFunction) {
-        let result = await this.createUserUseCase.execute(request.body)
+    async save(request: Request, response: Response, __next: NextFunction) {
+        const result = await this.createUserUseCase.execute(request.body)
         return response.status(200).json(result)
     }
 
-    async userCreatorProfile(request: Request, response: Response, next: NextFunction) {
-        let result = await this.profileUseCase.execute(+request.params.followedUserId)
+    async userCreatorProfile(request: Request, response: Response, _next: NextFunction) {
+        const result = await this.profileUseCase.execute(+request.params.followedUserId)
         return response.status(200).json(result)
     }
 }

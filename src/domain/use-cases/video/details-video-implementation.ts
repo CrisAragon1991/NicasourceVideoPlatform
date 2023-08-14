@@ -1,7 +1,7 @@
-import { VideoRepositoryImplementation } from "../../repositories/video-repository-implementation"
-import { videoDataSource } from "../../../data/data-source/video-data-source";
-import { Video } from "../../../data/entity/Video";
-import { IDetailsVideoUseCase } from "../../interfaces/use-cases/video/idetails-video";
+import { VideoRepositoryImplementation } from '../../repositories/video-repository-implementation'
+import { videoDataSource } from '../../../data/data-source/video-data-source'
+import { Video } from '../../../data/entity/Video'
+import { IDetailsVideoUseCase } from '../../interfaces/use-cases/video/idetails-video'
 
 export class DetailsVideoImplementation implements IDetailsVideoUseCase {
     

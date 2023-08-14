@@ -6,7 +6,7 @@ export class BaseEntity extends BaseEntityTypeOrm {
      *
      */
     constructor() {
-        super();
+        super()
     }
 
     @CreateDateColumn()

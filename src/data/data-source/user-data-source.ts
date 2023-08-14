@@ -1,9 +1,7 @@
-import { DataSource } from "typeorm"
-import { User } from "../entity/User"
-import { GenericDataSource } from "./generic-data-source/generic-data-source"
-import { FollowUser } from "../entity/FollowUser"
-import { ApplicationError } from "../../utilities/application-error"
-import { RESOURCE_NOT_FOUND } from "../../dictionaryConst/const"
+import { User } from '../entity/User'
+import { GenericDataSource } from './generic-data-source/generic-data-source'
+import { ApplicationError } from '../../utilities/application-error'
+import { RESOURCE_NOT_FOUND } from '../../dictionaryConst/const'
 
 export class UserDataSource extends GenericDataSource<User> {
     /**
@@ -14,7 +12,7 @@ export class UserDataSource extends GenericDataSource<User> {
     }
 
     async getProfile(userId: number) : Promise<User> {
-        let user = await this.repository.createQueryBuilder('user')
+        const user = await this.repository.createQueryBuilder('user')
                              .leftJoinAndSelect('user.role', 'role')
                              .leftJoinAndSelect('user.videos', 'videos')
                              .leftJoinAndSelect('videos.reaction', 'reaction')

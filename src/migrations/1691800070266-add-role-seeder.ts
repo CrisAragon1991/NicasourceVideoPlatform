@@ -1,4 +1,4 @@
-import { MigrationInterface, QueryRunner } from "typeorm"
+import { MigrationInterface, QueryRunner } from 'typeorm'
 
 export class AddRoleSeeder1691800070266 implements MigrationInterface {
 

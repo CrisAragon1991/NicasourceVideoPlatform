@@ -1,7 +1,7 @@
 import { BaseEntity } from  '../../entity/BaseEntity/BaseEntity'
 import { AppDataSource } from  '../../../data-source'
 import { InsertResult, Repository } from 'typeorm'
-import { ERROR_INSERTING_DATA, RESOURCE_NOT_FOUND } from '../../../dictionaryConst/const'
+import { RESOURCE_NOT_FOUND } from '../../../dictionaryConst/const'
 import { ApplicationError } from '../../../utilities/application-error'
 
 export class GenericDataSource<T extends BaseEntity> {
@@ -18,8 +18,7 @@ export class GenericDataSource<T extends BaseEntity> {
     }
 
     async create(resource: T) : Promise<T> {
-        let inserResult: InsertResult
-        inserResult = await this.repository.createQueryBuilder()
+        const inserResult: InsertResult = await this.repository.createQueryBuilder()
                        .insert()
                        .into(this.nameClass)
                        .values([resource])
@@ -35,17 +34,17 @@ export class GenericDataSource<T extends BaseEntity> {
     async getByParams(searchParams: {[key:string]: any}[], include: string[]) : Promise<T> {
         let searchstring = ''
         searchParams.forEach((param, index )=> {
-            let keyname = Object.keys(param)[0]
+            const keyname = Object.keys(param)[0]
             if (index === 0) {
                 searchstring = searchstring + `${this.nameClass}.${keyname} = '${param[keyname]}'`
             } else {
                 searchstring = searchstring + ` and where ${this.nameClass}.${keyname} = '${param.keyname}'`
             }
         })
-        let query = this.repository.createQueryBuilder(this.nameClass)
+        const query = this.repository.createQueryBuilder(this.nameClass)
                                    .where(searchstring)
         include.forEach(cad => {
-            let spliteableCad = cad.split('.')
+            const spliteableCad = cad.split('.')
             if (spliteableCad.length == 2) {
                 query.leftJoinAndSelect(`${spliteableCad[0]}.${spliteableCad[1]}`, `${spliteableCad[1]}`)
             }
@@ -53,7 +52,7 @@ export class GenericDataSource<T extends BaseEntity> {
                 query.leftJoinAndSelect(`${this.nameClass}.${cad}`, cad)
             }
         })
-        let result = await query.getOne();
+        const result = await query.getOne()
         if (result) {
             return result
         } else {
@@ -62,7 +61,7 @@ export class GenericDataSource<T extends BaseEntity> {
     }
 
     async update(id: number, origin: T) : Promise<boolean> {
-        let result = await this.repository.createQueryBuilder()
+        const result = await this.repository.createQueryBuilder()
                              .update(this.nameClass)
                              .set(origin)
                              .where(`${this.nameClass}.id = :id`, {id})

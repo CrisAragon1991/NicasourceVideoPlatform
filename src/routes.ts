@@ -67,7 +67,7 @@ export const UserRoutes = [
         controller: UserController,
         action: 'userCreatorProfile',
         dependencies: userControllerDependencies,
-        middlewares: [verifyToken, roleChecker([`followedUserIdIsTeacher`])]
+        middlewares: [verifyToken, roleChecker(['followedUserIdIsTeacher'])]
     }
 ]
 
@@ -132,7 +132,7 @@ export const followRoutes = [
         controller: FollowUserController,
         action: 'follow',
         dependencies: followControllerDependencies,
-        middlewares: [verifyToken, roleChecker([`followedUserIdIsTeacher`])]
+        middlewares: [verifyToken, roleChecker(['followedUserIdIsTeacher'])]
     },
     {
         method: 'post',
@@ -140,7 +140,7 @@ export const followRoutes = [
         controller: FollowUserController,
         action: 'unfollow',
         dependencies: followControllerDependencies,
-        middlewares: [verifyToken, roleChecker([`followedUserIdIsTeacher`])]
+        middlewares: [verifyToken, roleChecker(['followedUserIdIsTeacher'])]
     }
 ]
 export const Routes = [

@@ -1,5 +1,5 @@
-import { IsBoolean, IsEmail, IsNotEmpty, IsNumber, IsOptional, IsString, Matches, Max, MaxLength, MinLength, Validate } from "class-validator"
-import { CustomMatchPasswords } from "../../../utilities/custom-validator"
+import { IsBoolean, IsEmail, IsNumber, IsOptional, IsString, Matches, Max, MaxLength, MinLength, Validate } from 'class-validator'
+import { CustomMatchPasswords } from '../../../utilities/custom-validator'
 
 export class UserUpdateDto {
     @IsString()

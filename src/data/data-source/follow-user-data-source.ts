@@ -1,5 +1,5 @@
-import { GenericDataSource } from "./generic-data-source/generic-data-source"
-import { FollowUser } from "../entity/FollowUser"
+import { GenericDataSource } from './generic-data-source/generic-data-source'
+import { FollowUser } from '../entity/FollowUser'
 
 export class FollowUserDataSource extends GenericDataSource<FollowUser> {
    
@@ -8,9 +8,9 @@ export class FollowUserDataSource extends GenericDataSource<FollowUser> {
     }
 
     async followCreator(userLoggedId: number, userFollowedId: number) : Promise<boolean> {
-        let oldFollower = await this.repository.createQueryBuilder('follow_user')
-                                         .where(`"follow_user"."followeruserId" = :userLoggedId`, {userLoggedId})
-                                         .andWhere(`"follow_user"."followedUserId"  = :userFollowedId`, {userFollowedId})
+        const oldFollower = await this.repository.createQueryBuilder('follow_user')
+                                         .where('"follow_user"."followeruserId" = :userLoggedId', {userLoggedId})
+                                         .andWhere('"follow_user"."followedUserId"  = :userFollowedId', {userFollowedId})
                                          .getOne()
         if (oldFollower) {
             return true
@@ -26,12 +26,12 @@ export class FollowUserDataSource extends GenericDataSource<FollowUser> {
     }
 
     async unfollowCreator(userLoggedId: number, userFollowedId: number): Promise<boolean>{
-        console.log(`unfollow`,userFollowedId, userFollowedId)
+        console.log('unfollow',userFollowedId, userFollowedId)
         await this.repository.createQueryBuilder('follow_user')
                              .softDelete()
-                             .where(`"follow_user"."followeruserId" = :userLoggedId`, {userLoggedId})
-                             .andWhere(`"follow_user"."followedUserId"  = :userFollowedId`, {userFollowedId})
-                             .andWhere(`"follow_user"."deleteDate" IS NULL`)
+                             .where('"follow_user"."followeruserId" = :userLoggedId', {userLoggedId})
+                             .andWhere('"follow_user"."followedUserId"  = :userFollowedId', {userFollowedId})
+                             .andWhere('"follow_user"."deleteDate" IS NULL')
                              .execute()
         return true
     }

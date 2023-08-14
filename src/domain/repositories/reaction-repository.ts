@@ -1,6 +1,6 @@
-import { ReactionDataSource } from "../../data/data-source/reaction-data-source";
-import { Reaction } from "../../data/entity/Reaction";
-import { IBaseRepositoryCreate, IBaseRepositoryGetResourceByParams, IBaseRepositoryUpdateByIdentifier } from "../interfaces/repository/base-resource-repository/ibase-repository";
+import { ReactionDataSource } from '../../data/data-source/reaction-data-source'
+import { Reaction } from '../../data/entity/Reaction'
+import { IBaseRepositoryCreate, IBaseRepositoryGetResourceByParams, IBaseRepositoryUpdateByIdentifier } from '../interfaces/repository/base-resource-repository/ibase-repository'
 
 export class ReactionRepositoryImplementation implements IBaseRepositoryCreate<Reaction>, IBaseRepositoryGetResourceByParams<Reaction>, IBaseRepositoryUpdateByIdentifier<Reaction>{
     
@@ -10,7 +10,7 @@ export class ReactionRepositoryImplementation implements IBaseRepositoryCreate<R
      *
      */
     constructor(reactionDataSource: ReactionDataSource) {
-        this.reactionDataSource = reactionDataSource;
+        this.reactionDataSource = reactionDataSource
     }
 
     async getReactionByUserIdAndVideo(userId: number, videoId: number): Promise<Reaction | null>{

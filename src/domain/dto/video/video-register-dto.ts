@@ -1,5 +1,4 @@
-import { IsBoolean, IsNotEmpty, IsOptional, IsString, MinLength } from "class-validator"
-import { UploadedFile } from "express-fileupload";
+import { IsBoolean, IsNotEmpty, IsOptional, IsString, MinLength } from 'class-validator'
 
 export class VideoRegisterDto {
     @IsString()

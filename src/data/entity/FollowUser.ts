@@ -1,11 +1,10 @@
 import { Entity, PrimaryGeneratedColumn, ManyToOne } from 'typeorm'
-import { Video } from './Video';
-import { User } from './User';
-import { BaseEntity } from './BaseEntity/BaseEntity';
+import { User } from './User'
+import { BaseEntity } from './BaseEntity/BaseEntity'
 
 export enum ReactionType {
-    LIKE = "Like",
-    DISLIKE = "DisLike"
+    LIKE = 'Like',
+    DISLIKE = 'DisLike'
 }
 
 @Entity()

@@ -1,5 +1,5 @@
-import { GenericDataSource } from "./generic-data-source/generic-data-source"
-import { Reaction } from "../entity/Reaction"
+import { GenericDataSource } from './generic-data-source/generic-data-source'
+import { Reaction } from '../entity/Reaction'
 
 export class ReactionDataSource extends GenericDataSource<Reaction> {
     /**
@@ -10,7 +10,7 @@ export class ReactionDataSource extends GenericDataSource<Reaction> {
     }
 
     async findReactionByUserAndVideo(userId: number, videoId: number): Promise<Reaction | null>{
-        let reaction = await this.repository.createQueryBuilder(this.nameClass)
+        const reaction = await this.repository.createQueryBuilder(this.nameClass)
                        .where(`${this.nameClass}.videoId = :videoId`, {videoId})
                        .andWhere(`${this.nameClass}.userId = :userId`, {userId})
                        .getOne()

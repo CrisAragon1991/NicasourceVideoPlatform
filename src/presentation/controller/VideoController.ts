@@ -1,9 +1,8 @@
 import { NextFunction, Request, Response } from 'express'
-import { ICreateVideoUseCase } from '../../domain/interfaces/use-cases/video/icreate-video';
-import { ListVideoImplementation } from '../../domain/use-cases/video/list-video-implementation';
-import { IListVideoUseCase } from '../../domain/interfaces/use-cases/video/ilist-video';
-import { IDetailsVideoUseCase } from '../../domain/interfaces/use-cases/video/idetails-video';
-import { IUpdateVideoUseCase } from '../../domain/interfaces/use-cases/video/iupdate-video';
+import { ICreateVideoUseCase } from '../../domain/interfaces/use-cases/video/icreate-video'
+import { IListVideoUseCase } from '../../domain/interfaces/use-cases/video/ilist-video'
+import { IDetailsVideoUseCase } from '../../domain/interfaces/use-cases/video/idetails-video'
+import { IUpdateVideoUseCase } from '../../domain/interfaces/use-cases/video/iupdate-video'
 
 export class VideoController {
 
@@ -22,27 +21,27 @@ export class VideoController {
         this.updateVideoUseCase = updateVideoUseCase
     }
 
-    async save(request: Request, response: Response, next: NextFunction) {
-        let result = await this.createVideoUserCase.execute(request.body, (request as any).files.file, (request as any).user.id)
+    async save(request: Request, response: Response, _next: NextFunction) {
+        const result = await this.createVideoUserCase.execute(request.body, (request as any).files.file, (request as any).user.id)
         return response.status(200).json(result)
     }
 
-    async listAll(request: Request, response: Response, next: NextFunction) {
-        let result = await this.listVideoUseCase.execute()
+    async listAll(request: Request, response: Response, _next: NextFunction) {
+        const result = await this.listVideoUseCase.execute()
         return response.status(200).json(result)
     }
 
-    async detail(request: Request, response: Response, next: NextFunction) {
-        let result = await this.detailVideoUseCase.execute((request as any).params.videoId, [])
+    async detail(request: Request, response: Response, _next: NextFunction) {
+        const result = await this.detailVideoUseCase.execute((request as any).params.videoId, [])
         return response.status(200).json(result)
     }
 
-    async update(request: Request, response: Response, next: NextFunction) {
+    async update(request: Request, response: Response, _next: NextFunction) {
         await this.updateVideoUseCase.execute((request as any).params.videoId, {name: request.body.name, description: request.body.description})
         return response.status(204).send()
     }
 
-    async changeStatus(request: Request, response: Response, next: NextFunction) {
+    async changeStatus(request: Request, response: Response, _next: NextFunction) {
         await this.updateVideoUseCase.execute((request as any).params.videoId, {published: request.query.published === 'true' ? true : false} as any)
         return response.status(204).send()
     }

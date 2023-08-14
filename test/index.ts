@@ -1,7 +1,7 @@
 import * as express from 'express'
 import { Request, Response } from 'express'
-const app = express(); 
-app.use(express.json());
+const app = express()
+app.use(express.json())
 export const routeRegister = (Routes: any[], app) => {
     Routes.forEach((route) => {
         (app as any)[route.method](

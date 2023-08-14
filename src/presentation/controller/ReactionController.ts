@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express'
-import { IUpdateOrInsertReaction } from '../../domain/interfaces/use-cases/reaction/iupdate-insert-reaction';
+import { IUpdateOrInsertReaction } from '../../domain/interfaces/use-cases/reaction/iupdate-insert-reaction'
 
 export class ReactionController {
 
@@ -12,7 +12,7 @@ export class ReactionController {
         this.updateInsertReaction = updateInsertReaction
     }
 
-    async updateOrInsert(request: Request, response: Response, next: NextFunction) {
+    async updateOrInsert(request: Request, response: Response, _next: NextFunction) {
         await this.updateInsertReaction.execute((request as any).user.id, (request as any).params.videoId, request.body)
         return response.status(204).send()
     }

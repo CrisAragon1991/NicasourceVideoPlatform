@@ -5,7 +5,7 @@ import { Request, Response } from 'express'
 import { AppDataSource } from './data-source'
 import { Routes } from './routes'
 import { handleError } from './utilities/handle-error'
-import * as cors from "cors"
+import * as cors from 'cors'
 import * as fileUpload from 'express-fileupload'
 import { VIDEO_PATH } from './dictionaryConst/const'
 
@@ -18,8 +18,8 @@ AppDataSource.initialize()
     }))
     app.use(morgan('combined'))
     app.use(cors({
-      origin: "*",
-      methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
+      origin: '*',
+      methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
       credentials: true,
     }))
     app.use(bodyParser.json())
@@ -30,7 +30,7 @@ AppDataSource.initialize()
         (app as any)[route.method](
         route.route,
         ...route.middlewares,
-        async (req: Request, res: Response, next: Function) => {
+        async (req: Request, res: Response, next) => {
           try {
             const result = await new (route.controller as any)(...route.dependencies)[route.action](
               req,
@@ -55,4 +55,4 @@ AppDataSource.initialize()
       `Express server has started on port ${process.env.API_PORT}. Open http://localhost:${process.env.API_PORT} to see results`
     )
   })
-  .catch((error) => console.log(`Global Error`,error))
+  .catch((error) => console.log('Global Error',error))

@@ -1,6 +1,6 @@
-import { followUserDataSource } from "../../../data/data-source/follow-user-data-source";
-import { IDeleteFollowerUseCase } from "../../interfaces/use-cases/follow-user/idelete-follow-user";
-import { FollowUserRepository } from "../../repositories/follow-user-repository";
+import { followUserDataSource } from '../../../data/data-source/follow-user-data-source'
+import { IDeleteFollowerUseCase } from '../../interfaces/use-cases/follow-user/idelete-follow-user'
+import { FollowUserRepository } from '../../repositories/follow-user-repository'
 
 export class DeleteFollowImplemenation implements IDeleteFollowerUseCase {
 

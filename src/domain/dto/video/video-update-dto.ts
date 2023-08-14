@@ -1,4 +1,4 @@
-import { IsString, IsNotEmpty, MinLength, IsOptional } from "class-validator"
+import { IsString, IsNotEmpty, MinLength, IsOptional } from 'class-validator'
 
 export class VideoUpdateDto {
     @IsString()

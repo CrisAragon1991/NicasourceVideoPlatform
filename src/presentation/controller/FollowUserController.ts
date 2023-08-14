@@ -15,12 +15,12 @@ export class FollowUserController {
         this.unfollowerUseCase = unfollowUseCase
     }
 
-    async follow(request: Request, response: Response, next: NextFunction) {
+    async follow(request: Request, response: Response, _next: NextFunction) {
         await this.followerUseCase.execute((request as any).user.id, Number((request as any).params.followedUserId))
         return response.status(204).send()
     }
 
-    async unfollow(request: Request, response: Response, next: NextFunction) {
+    async unfollow(request: Request, response: Response, _next: NextFunction) {
         await this.unfollowerUseCase.execute((request as any).user.id, (request as any).params.followedUserId)
         return response.status(204).send()
     }

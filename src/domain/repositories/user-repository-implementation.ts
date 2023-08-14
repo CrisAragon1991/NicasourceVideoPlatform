@@ -1,6 +1,6 @@
-import { UserDataSource } from "../../data/data-source/user-data-source";
-import { User } from "../../data/entity/User";
-import { IBaseRepositoryCreate, IBaseRepositoryGetResourceByParams } from "../interfaces/repository/base-resource-repository/ibase-repository";
+import { UserDataSource } from '../../data/data-source/user-data-source'
+import { User } from '../../data/entity/User'
+import { IBaseRepositoryCreate, IBaseRepositoryGetResourceByParams } from '../interfaces/repository/base-resource-repository/ibase-repository'
 
 export class UserRepositoryImplementation implements IBaseRepositoryCreate<User>, IBaseRepositoryGetResourceByParams<User> {
     
@@ -10,7 +10,7 @@ export class UserRepositoryImplementation implements IBaseRepositoryCreate<User>
      *
      */
     constructor(userDataSource: UserDataSource) {
-        this.userDataSource = userDataSource;
+        this.userDataSource = userDataSource
     }
     getRosourceByParams(params: { [key: string]: any; }[], include: string[]): Promise<User> {
         return this.userDataSource.getByParams(params, include)

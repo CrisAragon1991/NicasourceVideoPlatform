@@ -1,7 +1,7 @@
-import { VideoRepositoryImplementation } from "../../repositories/video-repository-implementation"
-import { videoDataSource } from "../../../data/data-source/video-data-source";
-import { IUpdateVideoUseCase } from "../../interfaces/use-cases/video/iupdate-video";
-import { VideoUpdateDto } from "../../dto/video/video-update-dto";
+import { VideoRepositoryImplementation } from '../../repositories/video-repository-implementation'
+import { videoDataSource } from '../../../data/data-source/video-data-source'
+import { IUpdateVideoUseCase } from '../../interfaces/use-cases/video/iupdate-video'
+import { VideoUpdateDto } from '../../dto/video/video-update-dto'
 
 export class UpdateVideoImplementation implements IUpdateVideoUseCase {
     

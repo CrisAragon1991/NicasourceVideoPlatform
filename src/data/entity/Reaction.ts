@@ -1,7 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, ManyToOne, Column } from 'typeorm'
-import { Video } from './Video';
-import { User } from './User';
-import { BaseEntity } from './BaseEntity/BaseEntity';
+import { Video } from './Video'
+import { User } from './User'
+import { BaseEntity } from './BaseEntity/BaseEntity'
 
 export enum ReactionType {
     LIKE = 'Like',
@@ -17,7 +17,7 @@ export class Reaction extends BaseEntity {
     @PrimaryGeneratedColumn()
     id: number
 
-    @Column({type: "enum", enum: ReactionType, })
+    @Column({type: 'enum', enum: ReactionType, })
     reactionType: string
 
     @ManyToOne(() => Video, (video) => video.reaction)

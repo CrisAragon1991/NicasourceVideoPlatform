@@ -1,9 +1,9 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne } from 'typeorm'
-import { Video } from './Video';
-import { Reaction } from './Reaction';
-import { FollowUser } from './FollowUser';
-import { BaseEntity } from './BaseEntity/BaseEntity';
-import { Role } from './Role';
+import { Video } from './Video'
+import { Reaction } from './Reaction'
+import { FollowUser } from './FollowUser'
+import { BaseEntity } from './BaseEntity/BaseEntity'
+import { Role } from './Role'
 
 @Entity()
 export class User extends BaseEntity {
@@ -12,7 +12,7 @@ export class User extends BaseEntity {
     id: number
 
     @Column({type: 'varchar', nullable: false})
-    firstName: string;
+    firstName: string
 
     @Column({type: 'varchar', nullable: false})
     lastName: string

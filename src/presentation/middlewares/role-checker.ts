@@ -1,9 +1,9 @@
-import { NextFunction, Request, Response } from "express";
-import { ACCESS_DENIED, ACTION_NOT_ALLOWED } from "../../dictionaryConst/const";
-import { AppDataSource } from "../../data-source";
-import { Video } from "../../data/entity/Video";
-import { User } from "../../data/entity/User";
-import { RoleIdEnum } from "../../domain/enums/role-enum";
+import { NextFunction, Request, Response } from 'express'
+import { ACCESS_DENIED, ACTION_NOT_ALLOWED } from '../../dictionaryConst/const'
+import { AppDataSource } from '../../data-source'
+import { Video } from '../../data/entity/Video'
+import { User } from '../../data/entity/User'
+import { RoleIdEnum } from '../../domain/enums/role-enum'
 
 export const roleChecker = (rolesWithPermissions: string[]) => {
   return async function (req: Request, res: Response, next: NextFunction) {
@@ -11,7 +11,7 @@ export const roleChecker = (rolesWithPermissions: string[]) => {
         return next()
     }
     if (rolesWithPermissions.includes('video_owner')) {
-        let video = await AppDataSource.getRepository(Video)
+        const video = await AppDataSource.getRepository(Video)
                      .createQueryBuilder('video')
                      .leftJoinAndSelect('video.user', 'user')
                      .where('video.id = :id', {id: req.params.videoId})
@@ -21,7 +21,7 @@ export const roleChecker = (rolesWithPermissions: string[]) => {
         }
     }
     if (rolesWithPermissions.includes('followedUserIdIsTeacher')) {
-        let user = await AppDataSource.getRepository(User)
+        const user = await AppDataSource.getRepository(User)
                                       .createQueryBuilder('user')
                                       .leftJoinAndSelect('user.role', 'role')
                                       .where('user.id = :followedUserId', {followedUserId: req.params.followedUserId})
@@ -34,4 +34,4 @@ export const roleChecker = (rolesWithPermissions: string[]) => {
     }
     return res.status(401).send(ACCESS_DENIED)
   }
-};
+}
